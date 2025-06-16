@@ -15,18 +15,21 @@ int main(int argc, char *argv[]) {
     string s;
     cin >> s;
 
-    map<char, int> temp;
-    for (int i = 0; i < s.length(); i++) {
-        temp[s[i]]++;
+    int cur_len = 1;
+    int longest_len = 1;
+
+    for(int i = 1; i < s.length(); i++) {
+        if (s[i] == s[i - 1]) {
+            cur_len++;
+        } else {
+            longest_len = max(longest_len, cur_len);
+            cur_len = 1;
+        }
     }
 
-    int rep = 1;
-    for (auto x : temp) {
-        rep = max(x.second, rep);
-    }
+    longest_len = max(longest_len, cur_len);
 
-    cout << rep << endl;
-    
+    cout << longest_len << endl;
 
     return 0;
 }
